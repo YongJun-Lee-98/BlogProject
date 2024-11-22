@@ -1,5 +1,4 @@
 # 종속성
 .venv
 src/.env
-*/__pycache__/
-*/*/__pycache__/
+**/__pycache__/
