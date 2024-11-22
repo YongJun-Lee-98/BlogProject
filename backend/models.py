@@ -1,7 +1,9 @@
 from django.db import models
 import hashlib
+
 # Create your models here.
 class User(models.Model):
+    test = models.TextField(max_length=100)
     idx = models.AutoField(primary_key=True)
     user_id = models.CharField(max_length=30, unique=True)
     blog_name = models.CharField(max_length=50)
