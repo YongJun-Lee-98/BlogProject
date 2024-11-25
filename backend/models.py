@@ -3,13 +3,14 @@ import hashlib
 
 # Create your models here.
 class User(models.Model):
-    test = models.TextField(max_length=100)
     idx = models.AutoField(primary_key=True)
     user_id = models.CharField(max_length=30, unique=True)
     blog_name = models.CharField(max_length=50)
     password = models.CharField(max_length=256) # SHA256 암호화된 비밀번호
     salt = models.CharField(max_length=32, blank=True)
     slug = models.SlugField(unique=True)
+    info = models.CharField(max_length=100, blank=True)
+    
     
     def save(self, *args, **kwargs):
         if not self.salt:
