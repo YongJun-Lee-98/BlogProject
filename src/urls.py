@@ -16,9 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-# from rest_framework import routers, serializers, viewsets
 
-# from backend.models import User
+from rest_framework import routers, serializers, viewsets
+from backend.models import User
 
 # class UserSerializer(serializers.HyperlinkedModelSerializer):
 #     class Meta:
@@ -28,8 +28,8 @@ from django.urls import include, path
 # class UserViewSet(viewsets.ModelViewSet):
 #     queryset = User.objects.all()
     
-# path('api-auth/', include('rest_framework.urls'))
 urlpatterns = [
     path('admin/', admin.site.urls),
-    
+    path('api-auth/', include('rest_framework.urls')),
+    path('backend/', include('backend.urls'))
 ]

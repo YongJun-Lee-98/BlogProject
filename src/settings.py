@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 
+import rest_framework
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -80,7 +82,7 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-print(os.getenv('DB_USER'))
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -111,6 +113,38 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# 기본 권한 클래스를 IsAuthenticated로 설정 : 인증된 사용자만 API에 액세스할 수 있음
+# SessionAuthentication 및 TokenAuthentication과 같은 두 가지 인증 클래스를 지정함
+# 마지막으로, API의 페이지네이션 클래스와 페이지 크기를 정의함
+REST_FRAMEWORK = {
+    # 권한 부여에 사용되는 기본 권한 클래스를 지정함. API 뷰에 적용되는 접근 제어 규칙을 결정함
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ],
+    # 요청 인증에 사용되는 기본 인증 클래스를 설정, API 뷰에 적용되는 인증 메커니즘을 정의
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    # API 데이터 필터링에 사용되는 기본 필터 백엔드를 지정함. API 클라이언트가 사용할 수 있는 필터링 옵션을 정의할 수 있음
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    # "PAGE_SIZE": 10,
+    # 콘텐츠 협상에 사용되는 기본 렌더러 클래스를 지정함
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ],
+    # 요청 제한에 사용되는 기본 제한 클래스를 설정. 클라이언트가 API에 요청을 할 수 있는 속도를 제한
+    # 예시이므로 사용시 공식 페이지 확인해보기
+    # 'DEFAULT_THROTTLE_CLASSES': [
+    #     'rest_framework.throttling.AnonRateThrottle',
+    #     'rest_framework.throttling.UserRateThrottle',
+    # ],
+    # 'DEFAULT_THROTTLE_RATES': {
+    #     'anon': '100/day',
+    #     'user': '1000/day',
+    # }
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
