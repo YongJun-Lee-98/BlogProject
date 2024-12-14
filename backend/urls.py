@@ -1,8 +1,9 @@
 from django.urls import path
-from .views import create_post
-from rest_framework.authtoken.views import obtain_auth_token
+from .views import UserLoginView, TokenObtainPairView, UserRegistrationSerializer, UserRegistrationView, TokenRefreshView
 
 urlpatterns = [
-    path('add-post/', create_post, name='create_post'),
-    path('api-token-access/', obtain_auth_token),
+    # path('/', , name='token_obtain_pair'),
+    path('register/', UserRegistrationView.as_view(), name='user_register'),
+    path('login/', UserLoginView.as_view(), name='user-login'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='toekn-refresh'),
 ]

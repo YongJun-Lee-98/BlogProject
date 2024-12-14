@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Button from '../components/Button'
 import LoginModal from '../components/LoginModal'
+import SignUpModal from '../components/SignUpModal'
 // import './main.css'
 
 /* main 페이지 구성 /GET이 유저 정보까지 넘어오면 유저의 페이지로 바뀜
@@ -19,12 +20,23 @@ const HomePage: React.FC = () => {
     const handleClick = () => {
         alert(' Button clicked! ');
     };
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+    const openLoginModal = () => setIsLoginModalOpen(true);
+    const closeLoginModal = () => setIsLoginModalOpen(false);
+
+    const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
+    const openSignUpModal = () => setIsSignUpModalOpen(true);
+    const closeSignUpModal = () => setIsSignUpModalOpen(false);
 
     return (
         <div>
-            
-            <h2>Welcome to the Home page</h2>
+            <Button label="로그인" onClick={openLoginModal} />
+            <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />
             <Button label="Click Me" onClick={handleClick} />
+            <Button label="회원가입" onClick={openSignUpModal} />
+            <SignUpModal isOpen={isSignUpModalOpen} onRequestClose={closeSignUpModal} />
+            <h2>Python Blog</h2>
+            
         </div>
     );
 };
