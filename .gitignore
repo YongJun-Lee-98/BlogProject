@@ -1,0 +1,7 @@
+# 종속성
+.venv
+src/.env
+**/__pycache__/
+**/migrations/
+**/.env
+db.sqlite3
